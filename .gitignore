@@ -1,0 +1,19 @@
+# Neovim
+.plugin/
+compiled.lua
+
+# Plugin managers
+packer_compiled.lua
+lazy/
+
+# Cache / state
+.cache/
+state/
+shada/
+undo/
+swap/
+backup/
+
+# OS junk
+.DS_Store
+
