@@ -237,6 +237,41 @@ require("lazy").setup({
 	-- Then, because we use the `opts` key (recommended), the configuration runs
 	-- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
+	-- File tree sidebar (nvim-tree)
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+		config = function()
+			require("nvim-tree").setup({
+				sort_by = "case_sensitive",
+				view = {
+					width = 30,
+					side = "left",
+				},
+				renderer = {
+					group_empty = true,
+					icons = {
+						-- Automatically uses devicons if vim.g.have_nerd_font is true
+						show = {
+							file = vim.g.have_nerd_font,
+							folder = vim.g.have_nerd_font,
+							folder_arrow = vim.g.have_nerd_font,
+							git = vim.g.have_nerd_font,
+						},
+					},
+				},
+				filters = {
+					dotfiles = false,
+				},
+			})
+
+			-- Set keymap to toggle the tree sidebar
+			vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File [E]xplorer" })
+		end,
+	},
+
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
